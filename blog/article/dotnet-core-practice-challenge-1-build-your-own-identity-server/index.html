@@ -1,11 +1,9 @@
 <!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Khuong's Blog" href="https://khuongntrd.github.io/rss.xml"><meta name="generator" content="Astro v6.4.4"><style>@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/blog/static/fonts/9231f4d2b8055c70.woff") format("woff");font-display:swap;font-weight:400;font-style:normal;}@font-face{font-family:Atkinson-c7f4c4e8b285552f;src:url("/blog/static/fonts/6f04cbbb0c81711e.woff") format("woff");font-display:swap;font-weight:700;font-style:normal;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial";src:local("Arial");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.3717%;ascent-override:80.1033%;descent-override:25.2587%;line-gap-override:0%;}@font-face{font-family:"Atkinson-c7f4c4e8b285552f fallback: Arial Bold";src:local("Arial Bold");font-display:swap;font-weight:700;font-style:normal;size-adjust:92.2954%;ascent-override:86.2448%;descent-override:27.1953%;line-gap-override:0%;}:root{--font-atkinson:Atkinson-c7f4c4e8b285552f,"Atkinson-c7f4c4e8b285552f fallback: Arial","Atkinson-c7f4c4e8b285552f fallback: Arial Bold",sans-serif;}</style><link rel="preload" href="/blog/static/fonts/9231f4d2b8055c70.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/blog/static/fonts/6f04cbbb0c81711e.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://khuongntrd.github.io/blog/article/dotnet-core-practice-challenge-1-build-your-own-identity-server/"><!-- Primary Meta Tags --><title>ASP.NET Core Practice Challenge 1 — Build Your Own Identity Server</title><meta name="title" content="ASP.NET Core Practice Challenge 1 — Build Your Own Identity Server"><meta name="description" content="Implement a custom authentication system in ASP.NET Core including registration, email verification, login/logout, password reset, and profile management without using built-in Identity frameworks."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://khuongntrd.github.io/blog/article/dotnet-core-practice-challenge-1-build-your-own-identity-server/"><meta property="og:title" content="ASP.NET Core Practice Challenge 1 — Build Your Own Identity Server"><meta property="og:description" content="Implement a custom authentication system in ASP.NET Core including registration, email verification, login/logout, password reset, and profile management without using built-in Identity frameworks."><meta property="og:image" content="https://khuongntrd.github.io/blog/static/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://khuongntrd.github.io/blog/article/dotnet-core-practice-challenge-1-build-your-own-identity-server/"><meta property="twitter:title" content="ASP.NET Core Practice Challenge 1 — Build Your Own Identity Server"><meta property="twitter:description" content="Implement a custom authentication system in ASP.NET Core including registration, email verification, login/logout, password reset, and profile management without using built-in Identity frameworks."><meta property="twitter:image" content="https://khuongntrd.github.io/blog/static/blog-placeholder-1.Bx0Zcyzv.jpg"><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}body{font-family:var(--font-atkinson);margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:3.052em}h2{font-size:2.441em}h3{font-size:1.953em}h4{font-size:1.563em}h5{font-size:1.25em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0;font-size:1.333em}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media(max-width:720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#fff;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media(max-width:720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}
 main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
-</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/blog/" data-astro-cid-3ef6ksr2>Khuong&#39;s Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a> <a href="/blog" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a> </div> <div class="social-links" data-astro-cid-3ef6ksr2></div> </nav> </header> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/blog/static/blog-placeholder-3.ijrf8Ohr.jpg" width="960" height="480" alt="" loading="lazy" decoding="async" data-astro-cid-bvzihdzo> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-07-04T17:00:00.000Z"> Jul 5, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>ASP.NET Core Practice Challenge 1 — Build Your Own Identity Server</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="aspnet-core-practice-challenge-1--build-your-own-identity-server">ASP.NET Core Practice Challenge 1 — Build Your Own Identity Server</h2>
-<h3 id="goal">Goal</h3>
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/blog/" data-astro-cid-3ef6ksr2>Khuong&#39;s Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a> <a href="/blog" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a> </div> <div class="social-links" data-astro-cid-3ef6ksr2></div> </nav> </header> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo> <img src="/blog/static/blog-placeholder-3.ijrf8Ohr.jpg" width="960" height="480" alt="" loading="lazy" decoding="async" data-astro-cid-bvzihdzo> </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-07-04T17:00:00.000Z"> Jul 5, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>ASP.NET Core Practice Challenge 1 — Build Your Own Identity Server</h1> <hr data-astro-cid-bvzihdzo> </div>  <h4 id="goal">Goal</h4>
 <p>Design and implement a <strong>custom authentication and user management system</strong> using ASP.NET Core MVC or Razor Pages without relying on built-in identity frameworks (no ASP.NET Core Identity, OpenIddict, or external auth libraries).</p>
-<hr>
-<h2 id="1-core-feature-requirements">1. Core Feature Requirements</h2>
-<h3 id="11-user-registration-system">1.1 User Registration System</h3>
+<h4 id="1-core-feature-requirements">1. Core Feature Requirements</h4>
+<h5 id="11-user-registration-system">1.1 User Registration System</h5>
 <p>You must implement:</p>
 <ul>
 <li>User sign-up with:
@@ -28,7 +26,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 </li>
 </ul>
 <hr>
-<h3 id="12-email-verification-system">1.2 Email Verification System</h3>
+<h5 id="12-email-verification-system">1.2 Email Verification System</h5>
 <p>You must implement:</p>
 <ul>
 <li>Email confirmation flow</li>
@@ -43,14 +41,14 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 </li>
 </ul>
 <hr>
-<h3 id="13-welcome-email-system">1.3 Welcome Email System</h3>
+<h5 id="13-welcome-email-system">1.3 Welcome Email System</h5>
 <p>After successful email confirmation:</p>
 <ul>
 <li>Send a welcome email to the user</li>
 <li>Email should confirm account activation</li>
 </ul>
 <hr>
-<h3 id="14-authentication-loginlogout">1.4 Authentication (Login/Logout)</h3>
+<h5 id="14-authentication-loginlogout">1.4 Authentication (Login/Logout)</h5>
 <p>You must implement:</p>
 <ul>
 <li>Login using:
@@ -76,7 +74,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 </li>
 </ul>
 <hr>
-<h3 id="15-password-reset-system">1.5 Password Reset System</h3>
+<h5 id="15-password-reset-system">1.5 Password Reset System</h5>
 <p>You must implement:</p>
 <ul>
 <li>“Forgot Password” flow:
@@ -100,7 +98,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 </li>
 </ul>
 <hr>
-<h3 id="16-user-profile-management">1.6 User Profile Management</h3>
+<h5 id="16-user-profile-management">1.6 User Profile Management</h5>
 <p>Authenticated users must be able to:</p>
 <ul>
 <li>View profile</li>
@@ -118,7 +116,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 <li>Users can only modify their own data</li>
 </ul>
 <hr>
-<h3 id="17-avatar-upload-system">1.7 Avatar Upload System</h3>
+<h5 id="17-avatar-upload-system">1.7 Avatar Upload System</h5>
 <p>You must implement:</p>
 <ul>
 <li>File upload mechanism</li>
@@ -127,9 +125,9 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 <li>Validate file type and size</li>
 </ul>
 <hr>
-<h2 id="2-security-requirements-critical">2. Security Requirements (Critical)</h2>
+<h4 id="2-security-requirements-critical">2. Security Requirements (Critical)</h4>
 <p>You must implement security manually:</p>
-<h3 id="21-password-security">2.1 Password Security</h3>
+<h5 id="21-password-security">2.1 Password Security</h5>
 <ul>
 <li>Passwords must never be stored in plain text</li>
 <li>Must use:
@@ -140,7 +138,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 <li>Must support password verification</li>
 </ul>
 <hr>
-<h3 id="22-authentication-security">2.2 Authentication Security</h3>
+<h5 id="22-authentication-security">2.2 Authentication Security</h5>
 <ul>
 <li>Use cookie-based authentication</li>
 <li>Cookies must be configured securely:
@@ -152,7 +150,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 </li>
 </ul>
 <hr>
-<h3 id="23-token-security">2.3 Token Security</h3>
+<h5 id="23-token-security">2.3 Token Security</h5>
 <p>For:</p>
 <ul>
 <li>Email verification</li>
@@ -170,7 +168,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 <li>Tokens are invalidated after use</li>
 </ul>
 <hr>
-<h3 id="24-input-validation">2.4 Input Validation</h3>
+<h5 id="24-input-validation">2.4 Input Validation</h5>
 <ul>
 <li>Validate all incoming data:
 <ul>
@@ -181,7 +179,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 </li>
 </ul>
 <hr>
-<h2 id="3-data-structure-requirements">3. Data Structure Requirements</h2>
+<h4 id="3-data-structure-requirements">3. Data Structure Requirements</h4>
 <p>You must design your own database schema for:</p>
 <ul>
 <li>Users</li>
@@ -196,7 +194,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 </li>
 </ul>
 <hr>
-<h2 id="4-ui-requirements-mvc-or-razor-pages">4. UI Requirements (MVC or Razor Pages)</h2>
+<h4 id="4-ui-requirements-mvc-or-razor-pages">4. UI Requirements (MVC or Razor Pages)</h4>
 <p>You must implement pages for:</p>
 <ul>
 <li>Registration page</li>
@@ -207,32 +205,32 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 <li>Profile page (authenticated only)</li>
 </ul>
 <hr>
-<h2 id="5-backend-api--endpoint-requirements">5. Backend API / Endpoint Requirements</h2>
+<h4 id="5-backend-api--endpoint-requirements">5. Backend API / Endpoint Requirements</h4>
 <p>You must expose endpoints for:</p>
-<h3 id="authentication">Authentication</h3>
+<h5 id="authentication">Authentication</h5>
 <ul>
 <li>Register</li>
 <li>Login</li>
 <li>Logout</li>
 </ul>
-<h3 id="email-flows">Email flows</h3>
+<h5 id="email-flows">Email flows</h5>
 <ul>
 <li>Confirm email</li>
 <li>Resend confirmation (optional enhancement)</li>
 </ul>
-<h3 id="password-reset">Password reset</h3>
+<h5 id="password-reset">Password reset</h5>
 <ul>
 <li>Request reset</li>
 <li>Reset password</li>
 </ul>
-<h3 id="profile">Profile</h3>
+<h5 id="profile">Profile</h5>
 <ul>
 <li>Get profile</li>
 <li>Update profile</li>
 </ul>
 <hr>
-<h2 id="6-testing-requirements">6. Testing Requirements</h2>
-<h3 id="61-unit-tests">6.1 Unit Tests</h3>
+<h4 id="6-testing-requirements">6. Testing Requirements</h4>
+<h5 id="61-unit-tests">6.1 Unit Tests</h5>
 <p>You must test:</p>
 <ul>
 <li>Password hashing and verification logic</li>
@@ -240,7 +238,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 <li>User creation logic (service layer)</li>
 </ul>
 <hr>
-<h3 id="62-integration-tests">6.2 Integration Tests</h3>
+<h5 id="62-integration-tests">6.2 Integration Tests</h5>
 <p>You must test:</p>
 <ul>
 <li>Registration flow end-to-end</li>
@@ -251,7 +249,7 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 </ul>
 <p>Use test server + in-memory database or test DB.</p>
 <hr>
-<h2 id="7-architecture-requirements">7. Architecture Requirements</h2>
+<h4 id="7-architecture-requirements">7. Architecture Requirements</h4>
 <p>You must demonstrate:</p>
 <ul>
 <li>Separation of concerns:
@@ -272,23 +270,23 @@ main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.he
 </li>
 </ul>
 <hr>
-<h2 id="8-non-functional-requirements">8. Non-Functional Requirements</h2>
-<h3 id="81-reliability">8.1 Reliability</h3>
+<h4 id="8-non-functional-requirements">8. Non-Functional Requirements</h4>
+<h5 id="81-reliability">8.1 Reliability</h5>
 <ul>
 <li>Handle invalid tokens gracefully</li>
 <li>Prevent duplicate registrations</li>
 </ul>
-<h3 id="82-security-hygiene">8.2 Security hygiene</h3>
+<h5 id="82-security-hygiene">8.2 Security hygiene</h5>
 <ul>
 <li>No sensitive data in logs</li>
 <li>No plaintext passwords or tokens exposed</li>
 </ul>
-<h3 id="83-maintainability">8.3 Maintainability</h3>
+<h5 id="83-maintainability">8.3 Maintainability</h5>
 <ul>
 <li>Code should be modular and testable</li>
 </ul>
 <hr>
-<h2 id="9-optional-bonus-challenges">9. Optional (Bonus Challenges)</h2>
+<h4 id="9-optional-bonus-challenges">9. Optional (Bonus Challenges)</h4>
 <p>If you want to push further:</p>
 <ul>
 <li>Account lockout after failed login attempts</li>
